@@ -22,7 +22,8 @@
   </head>
   <body ng-controller="HomeController">
     <a href="https://github.com/ianwalter/angular-breadcrumbs">
-      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+      <img style="position: absolute; top: 0; right: 0; border: 0;"
+           src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
     </a>
     <br>
     <div class="container">
@@ -34,7 +35,10 @@
           </header>
           <br>
           <ol class="ab-nav breadcrumb">
-            <li ng-repeat="breadcrumb in breadcrumbs.getAll()"><a href="#{{breadcrumb.path}}" ng-hide="$last">{{breadcrumb.label}}</a><span ng-show="$last">{{breadcrumb.label}}</span></li>
+            <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+                <a href="#{{ breadcrumb.path }}" ng-hide="$last">{{ breadcrumb.label }}</a>
+                <span ng-show="$last">{{ breadcrumb.label }}</span>
+            </li>
           </ol>
           <div ng-view ng-cloak></div>
         </div>
@@ -42,6 +46,6 @@
     </div>
   </body>
   <script id="messageTemplate" type="text/x-handlebars-template">
-    <p><i class="icon-desktop icon-2x"></i> &nbsp; {{model.attributes.welcomeMessage}}</p>
+    <p><i class="icon-desktop icon-2x"></i> &nbsp; {{ model.attributes.welcomeMessage }}</p>
   </script>
 </html>
