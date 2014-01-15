@@ -1,9 +1,3 @@
-/**
- * angular-breadcrumb.js - A better AngularJS service to help with breadcrumb-style navigation between views.
- * Based on breadcrumb.js (https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js)
- *
- * @author Ian Kennington Walter (http://www.iankwalter.com)
- */
 angular.module('services.breadcrumbs', []);
 angular.module('services.breadcrumbs').factory('breadcrumbs', ['$rootScope', '$location', '$route', function($rootScope, $location, $route) {
 
