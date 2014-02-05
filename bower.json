@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "keywords": [
+    "ng-breadcrumbs",
     "angular",
     "angularjs",
-    "breadcrumb",
+    "breadcrumbs",
     "navigation",
     "route"
   ],
