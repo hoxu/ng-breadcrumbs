@@ -1,19 +1,23 @@
-[angular-breadcrumbs](http://ianwalter.github.io/angular-breadcrumbs/)
-===================
+# [angular-breadcrumbs](http://ianwalter.github.io/angular-breadcrumbs/)
+*A better AngularJS service to help with breadcrumb-style navigation between views.*
 
-A better AngularJS service to help with breadcrumb-style navigation between views.
+The full source code to the following example can be checked out from the 'gh-pages' branch.
 
-The full source code to the following example can be checked out from the 'gh-pages' brach.
 
-#### Step 1: Include angular-breadcrumbs
+#### Step 1: Install angular-breadcrumbs
 
-Include angular-breadcrumb.min.js in your app under the angular.min.js reference
+Install using Bower:
+
+```
+bower install angular-breadcrumbs --save
+```
+
+Include angular-breadcrumb.min.js in your app.
 
 #### Step 2: Set up routing
 
 In order to use breadcrumbs you'll need to use configure your app to use Angular's routeProvider. You'll also need to 
 include the breadcrumbs service. You can then set a label for each route (breadcrumb) within the route options.
-
 
 ```javascript
   var app = angular.module('ab', ['services.breadcrumbs'])
@@ -25,6 +29,7 @@ include the breadcrumbs service. You can then set a label for each route (breadc
         .otherwise({ redirectTo: '/' });
 ```
 
+
 #### Step 3: Make the breadcrumb object available to your app
 
 Set the breadcrumb object in your app's main controller.
@@ -33,6 +38,7 @@ Set the breadcrumb object in your app's main controller.
   app.controller('HomeController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs) {
     $scope.breadcrumbs = breadcrumbs;
 ```
+
 
 #### Step 4: Display the breadcrumbs within your app
 
@@ -48,7 +54,6 @@ unlinked.
 
 That's it! You should now have breadcrumb navigation that can even handle nested routes.
 
-I hope you find this useful.
+I hope you find this useful!
 
-Thanks,
-[Ian](http://www.iankwalter.com)
+«-- [Ian](http://www.iankwalter.com)
