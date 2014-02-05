@@ -8,11 +8,11 @@ requirejs.config({
   paths: {
     'angular': [
       '//ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min',
-      'lib/angular/angular'
+      'assets/lib/angular/angular'
     ],
     'angular-route': [
       '//ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular-route.min',
-      'lib/angular-route/angular-route.min'
+      'assets/lib/angular-route/angular-route.min'
     ],
     'angular-breadcrumbs': [
       'dist/js/angular-breadcrumbs.min'
