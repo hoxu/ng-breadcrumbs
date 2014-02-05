@@ -23,9 +23,12 @@ include the breadcrumbs service. You can then set a label for each route (breadc
   var app = angular.module('ab', ['services.breadcrumbs'])
     .config(['$routeProvider', function($routeProvider) {
       $routeProvider
-        .when('/', { controller: 'HomeController', templateUrl: 'vw/home.html', label: 'Home' })
-        .when('/stock/:stock', { controller: 'StockController', templateUrl: 'vw/stock.html', label: 'Stock' })
-        .when('/stock/:stock/detail', { controller: 'StockDetailController', templateUrl: 'vw/stock-detail.html', label: 'Stock Detail' })
+        .when('/', { controller: 'HomeController',
+          templateUrl: 'vw/home.html', label: 'Home' })
+        .when('/stock/:stock', { controller: 'StockController',
+          templateUrl: 'vw/stock.html', label: 'Stock' })
+        .when('/stock/:stock/detail', { controller: 'StockDetailController',
+          templateUrl: 'vw/stock-detail.html', label: 'Stock Detail' })
         .otherwise({ redirectTo: '/' });
 ```
 
@@ -35,8 +38,12 @@ include the breadcrumbs service. You can then set a label for each route (breadc
 Set the breadcrumb object in your app's main controller.
 
 ```javascript
-  app.controller('HomeController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs) {
-    $scope.breadcrumbs = breadcrumbs;
+  app.controller('HomeController', [
+    '$scope',
+    'breadcrumbs',
+    function($scope, breadcrumbs) {
+      $scope.breadcrumbs = breadcrumbs;
+      ...
 ```
 
 
@@ -47,7 +54,11 @@ unlinked.
 
 ```html
   <ol class="breadcrumb">
-    <li ng-repeat="breadcrumb in breadcrumbs.getAll()"><a href="#{{breadcrumb.path}}" ng-hide="$last">{{breadcrumb.label}}</a><span ng-show="$last">{{breadcrumb.label}}</span></li>
+    <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+      <a href="#{{breadcrumb.path}}" ng-hide="$last">
+        {{breadcrumb.label}}
+      </a>
+      <span ng-show="$last">{{breadcrumb.label}}</span></li>
   </ol>
   <div ng-view ng-cloak></div>
 ```
@@ -56,4 +67,4 @@ That's it! You should now have breadcrumb navigation that can even handle nested
 
 I hope you find this useful!
 
-«-- [Ian](http://www.iankwalter.com)
+«–– [Ian](http://www.iankwalter.com)
