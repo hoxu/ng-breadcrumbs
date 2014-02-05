@@ -15,7 +15,7 @@ requirejs.config({
       'assets/lib/angular-route/angular-route.min'
     ],
     'angular-breadcrumbs': [
-      '//ianwalter.github.io/dist/js/angular-breadcrumbs.min.',
+      '//ianwalter.github.io/angular-breadcrumbs/dist/js/angular-breadcrumbs.min',
       'dist/js/angular-breadcrumbs.min'
     ]
   },
