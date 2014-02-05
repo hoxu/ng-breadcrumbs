@@ -9,7 +9,7 @@ The full source code to the following example can be checked out from the 'gh-pa
 Install using Bower:
 
 ```
-bower install angular-breadcrumbs --save
+bower install angular-breadcrumbs-simple --save
 ```
 
 Include angular-breadcrumb.min.js in your app.
