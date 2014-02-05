@@ -1,0 +1,47 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>angular-breadcrumb</title>
+
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <style>
+    .ab-nav.breadcrumb {
+      margin-bottom: 30px;
+    }
+  </style>
+
+  <script src="lib/requirejs/require.js" data-main="assets/js/app.js"></script>
+</head>
+<body ng-controller="HomeController">
+<a href="https://github.com/ianwalter/angular-breadcrumbs">
+  <img style="position: absolute; top: 0; right: 0; border: 0;"
+       src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <header>
+        <h1>angular-breadcrumbs</h1>
+        <h4>A better AngularJS service to help with breadcrumb-style navigation between views.</h4>
+      </header>
+      <br>
+      <ol class="ab-nav breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+          <a href="#{{ breadcrumb.path }}" ng-hide="$last">{{ breadcrumb.label }}</a>
+          <span ng-show="$last">{{ breadcrumb.label }}</span>
+        </li>
+      </ol>
+      <div ng-view ng-cloak></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -4,9 +4,9 @@
  *
  * @author Ian Kennington Walter (http://www.iankwalter.com)
  */
-angular.module('services.breadcrumbs', []);
-angular.module('services.breadcrumbs').factory('breadcrumbs', ['$rootScope', '$location', '$route', function($rootScope, $location, $route) {
-
+angular
+  .module('angular-breadcrumbs', [])
+  .factory('breadcrumbs', ['$rootScope', '$location', '$route', function($rootScope, $location, $route) {
     var breadcrumbs = [],
         breadcrumbsService = {},
         routes = $route.routes;
@@ -23,7 +23,7 @@ angular.module('services.breadcrumbs').factory('breadcrumbs', ['$rootScope', '$l
             });
             return route;
         };
-        if (pathElements[1] == '') delete pathElements[1];
+        if (pathElements[1] === '') delete pathElements[1];
         angular.forEach(pathElements, function(el) {
             path += path === '/' ? el : '/' + el;
             var route = getRoute(path);

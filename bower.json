@@ -1,0 +1,36 @@
+{
+  "name": "angular-breadcrumbs",
+  "version": "0.0.1",
+  "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "breadcrumb",
+    "navigation",
+    "route"
+  ],
+  "authors": [
+    "Ian Kennington Walter <http://www.iankwalter.com>"
+  ],
+  "license": "MIT",
+  "homepage": "http://ianwalter.github.io/angular-breadcrumbs/",
+  "main": [
+    "dist/js/angular-breadcrumbs.min.js",
+    "README.md"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib",
+    "test",
+    "assets",
+    "src",
+    "index.html",
+    "gulpfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "~1.2.5",
+    "angular-route": "~1.2.5"
+  }
+}
