@@ -1,6 +1,6 @@
 {
-  "name": "angular-breadcrumbs",
-  "version": "0.0.1",
+  "name": "ng-breadcrumbs",
+  "version": "0.0.2",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "main": "dist/js/ng-breadcrumbs.min.js",
   "devDependencies": {
@@ -14,9 +14,10 @@
     "test": "gulp test"
   },
   "keywords": [
+    "ng-breadcrumbs",
     "angular",
     "angularjs",
-    "breadcrumb",
+    "breadcrumbs",
     "navigation",
     "route"
   ],
