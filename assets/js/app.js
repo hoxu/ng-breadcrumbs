@@ -1,5 +1,5 @@
 /**
- * Example application for angular-breadcrumbs.js (https://github.com/ianwalter/angular-breadcrumbs)
+ * Example application for angular-breadcrumbs.js (https://github.com/ianwalter/ng-breadcrumbs)
  *
  * @author Ian Kennington Walter (http://www.iankwalter.com)
  */
@@ -14,22 +14,22 @@ requirejs.config({
       '//ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular-route.min',
       'assets/lib/angular-route/angular-route.min'
     ],
-    'angular-breadcrumbs': [
-      '//ianwalter.github.io/angular-breadcrumbs/dist/js/angular-breadcrumbs.min',
-      'dist/js/angular-breadcrumbs.min'
+    'ng-breadcrumbs': [
+      '//ianwalter.github.io/ng-breadcrumbs/dist/js/ng-breadcrumbs.min',
+      'dist/js/ng-breadcrumbs.min'
     ]
   },
   shim: {
     'angular' : { 'exports' : 'angular' },
     'angular-route': { deps:['angular'] },
-    'angular-breadcrumbs': { deps:['angular'] }
+    'ng-breadcrumbs': { deps:['angular'] }
   }
 });
 
-require(['angular', 'angular-route', 'angular-breadcrumbs'], function(angular) {
+require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
   "use strict";
 
-  var app = angular.module('ab', ['ngRoute', 'angular-breadcrumbs'])
+  var app = angular.module('ab', ['ngRoute', 'ng-breadcrumbs'])
     .config(['$routeProvider', function($routeProvider) {
       $routeProvider
         .when('/', { controller: 'HomeController', templateUrl: 'assets/template/home.html', label: 'Home' })

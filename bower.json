@@ -1,5 +1,5 @@
 {
-  "name": "angular-breadcrumbs",
+  "name": "ng-breadcrumbs",
   "version": "0.0.1",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "keywords": [
@@ -15,7 +15,7 @@
   "license": "MIT",
   "homepage": "http://ianwalter.github.io/angular-breadcrumbs/",
   "main": [
-    "dist/js/angular-breadcrumbs.min.js",
+    "dist/js/ng-breadcrumbs.min.js",
     "README.md"
   ],
   "ignore": [

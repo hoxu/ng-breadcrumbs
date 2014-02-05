@@ -1,18 +1,18 @@
-# [angular-breadcrumbs](http://ianwalter.github.io/angular-breadcrumbs/)
+# [ng-breadcrumbs](http://ianwalter.github.io/ng-breadcrumbs/)
 *A better AngularJS service to help with breadcrumb-style navigation between views.*
 
 The full source code to the following example can be checked out from the 'gh-pages' branch.
 
 
-#### Step 1: Install angular-breadcrumbs
+#### Step 1: Install ng-breadcrumbs
 
 Install using Bower:
 
 ```
-bower install angular-breadcrumbs-simple --save
+bower install ng-breadcrumbs --save
 ```
 
-Include angular-breadcrumb.min.js in your app.
+Include ng-breadcrumbs.min.js in your app.
 
 #### Step 2: Set up routing
 
@@ -20,7 +20,7 @@ In order to use breadcrumbs you'll need to use configure your app to use Angular
 include the breadcrumbs service. You can then set a label for each route (breadcrumb) within the route options.
 
 ```javascript
-  var app = angular.module('ab', ['services.breadcrumbs'])
+  var app = angular.module('ab', ['ng-breadcrumbs'])
     .config(['$routeProvider', function($routeProvider) {
       $routeProvider
         .when('/', { controller: 'HomeController',

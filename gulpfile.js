@@ -21,9 +21,9 @@ gulp.task('lint', function () {
 
 gulp.task('js', function () {
   gulp.src('src/js/**/*.js')
-    .pipe(concat('angular-breadcrumbs.js'))
+    .pipe(concat('ng-breadcrumbs.js'))
     .pipe(gulp.dest('dist/js'))
     .pipe(uglify())
-    .pipe(rename('angular-breadcrumbs.min.js'))
+    .pipe(rename('ng-breadcrumbs.min.js'))
     .pipe(gulp.dest('dist/js'));
 });
