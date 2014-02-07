@@ -1,8 +1,6 @@
 # [ng-breadcrumbs](http://ianwalter.github.io/ng-breadcrumbs/)
 *A better AngularJS service to help with breadcrumb-style navigation between views.*
 
-The full source code to the following example can be checked out from the 'gh-pages' branch.
-
 
 #### Step 1: Install ng-breadcrumbs
 
