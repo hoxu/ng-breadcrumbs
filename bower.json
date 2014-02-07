@@ -14,7 +14,7 @@
     "Ian Kennington Walter <http://www.iankwalter.com>"
   ],
   "license": "MIT",
-  "homepage": "http://ianwalter.github.io/angular-breadcrumbs/",
+  "homepage": "http://ianwalter.github.io/ng-breadcrumbs/",
   "main": [
     "dist/js/ng-breadcrumbs.min.js",
     "README.md"
