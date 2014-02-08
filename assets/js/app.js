@@ -32,7 +32,7 @@ require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
   var app = angular.module('ab', ['ngRoute', 'ng-breadcrumbs'])
     .config(['$routeProvider', function($routeProvider) {
       $routeProvider
-        .when('/', { controller: 'HomeController', templateUrl: 'assets/template/home.html', label: 'Home' })
+        .when('/', { templateUrl: 'assets/template/home.html', label: 'Home' })
         .when('/stock/:stock', { controller: 'StockController', templateUrl: 'assets/template/stock.html', label: 'Stock' })
         .when('/stock/:stock/detail', { controller: 'StockDetailController', templateUrl: 'assets/template/stock-detail.html',
           label: 'Stock Detail' })
