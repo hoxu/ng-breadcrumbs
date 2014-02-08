@@ -4,7 +4,7 @@
  * @author Ian Kennington Walter (http://www.iankwalter.com)
  */
 requirejs.config({
-  baseUrl: '/',
+  baseUrl: '.',
   paths: {
     'angular': [
       '//ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min',
@@ -15,8 +15,8 @@ requirejs.config({
       'assets/lib/angular-route/angular-route.min'
     ],
     'ng-breadcrumbs': [
-      '//ianwalter.github.io/ng-breadcrumbs/dist/js/ng-breadcrumbs.min',
-      'dist/js/ng-breadcrumbs.min'
+      'dist/js/ng-breadcrumbs.min',
+      '//ianwalter.github.io/ng-breadcrumbs/dist/js/ng-breadcrumbs.min'
     ]
   },
   shim: {

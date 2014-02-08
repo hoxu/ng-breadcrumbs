@@ -1,6 +1,6 @@
 {
   "name": "ng-breadcrumbs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "keywords": [
     "ng-breadcrumbs",
@@ -30,7 +30,7 @@
     "package.json"
   ],
   "dependencies": {
-    "angular": "~1.2.5",
-    "angular-route": "~1.2.5"
+    "angular": ">= 1.2.5",
+    "angular-route": ">= 1.2.5"
   }
 }
