@@ -1,5 +1,5 @@
 /**
- * Example application for angular-breadcrumbs.js (https://github.com/ianwalter/ng-breadcrumbs)
+ * Example application for ng-breadcrumbs (https://github.com/ianwalter/ng-breadcrumbs)
  *
  * @author Ian Kennington Walter (http://www.iankwalter.com)
  */
