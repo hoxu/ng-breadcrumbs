@@ -15,7 +15,7 @@ Include ng-breadcrumbs.min.js in your app.
 #### Step 2: Set up routing
 
 In order to use breadcrumbs you'll need to use configure your app to use Angular's routeProvider. You'll also need to 
-include the breadcrumbs service. You can then set a label for each route (breadcrumb) within the route options.
+load the ng-breadcrumbs module. You can then set a label for each route (breadcrumb) within the route options.
 
 ```javascript
   var app = angular.module('ab', ['ng-breadcrumbs'])
@@ -31,9 +31,9 @@ include the breadcrumbs service. You can then set a label for each route (breadc
 ```
 
 
-#### Step 3: Make the breadcrumb object available to your app
+#### Step 3: Make the breadcrumbs service available to your controller
 
-Set the breadcrumb object in your app's main controller.
+Set the breadcrumbs service in your app's main controller.
 
 ```javascript
   app.controller('HomeController', [
