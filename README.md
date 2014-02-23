@@ -66,3 +66,7 @@ That's it! You should now have breadcrumb navigation that can even handle nested
 I hope you find this useful!
 
 «–– [Ian](http://www.iankwalter.com)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ianwalter/ng-breadcrumbs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
