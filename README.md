@@ -18,15 +18,16 @@ In order to use breadcrumbs you'll need to use configure your app to use Angular
 load the ng-breadcrumbs module. You can then set a label for each route (breadcrumb) within the route options.
 
 ```javascript
-  var app = angular.module('ab', ['ng-breadcrumbs'])
+  var app = angular.module('ab', ['ngRoute', 'ng-breadcrumbs'])
     .config(['$routeProvider', function($routeProvider) {
       $routeProvider
-        .when('/', { controller: 'HomeController',
-          templateUrl: 'vw/home.html', label: 'Home' })
-        .when('/stock/:stock', { controller: 'StockController',
-          templateUrl: 'vw/stock.html', label: 'Stock' })
-        .when('/stock/:stock/detail', { controller: 'StockDetailController',
-          templateUrl: 'vw/stock-detail.html', label: 'Stock Detail' })
+        .when('/', { templateUrl: 'assets/template/home.html', label: 'Home' })
+        .when('/stock/:stock', { controller: 'StockController', templateUrl: 'assets/template/stock.html' })
+        .when('/stock/:stock/detail', {
+          controller: 'StockDetailController',
+          templateUrl: 'assets/template/stock-detail.html',
+          label: 'More Detail'
+        })
         .otherwise({ redirectTo: '/' });
 ```
 
@@ -51,22 +52,16 @@ This HTML snippet will display your breadcrumb navigation and leave the last bre
 unlinked.
 
 ```html
-  <ol class="breadcrumb">
-    <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
-      <a href="#{{breadcrumb.path}}" ng-hide="$last">
-        {{breadcrumb.label}}
-      </a>
-      <span ng-show="$last">{{breadcrumb.label}}</span></li>
+  <ol class="ab-nav breadcrumb">
+    <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+      <a ng-if="!$last" ng-href="#{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+      <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+    </li>
   </ol>
-  <div ng-view ng-cloak></div>
 ```
 
 That's it! You should now have breadcrumb navigation that can even handle nested routes.
 
 I hope you find this useful!
 
-«–– [Ian](http://www.iankwalter.com)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ianwalter/ng-breadcrumbs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+«–– [Ian](http://www.ianvonwalter.com)
