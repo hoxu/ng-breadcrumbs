@@ -10,6 +10,18 @@ angular
     var BreadcrumbService = {
       breadcrumbs: [],
       get: function() {
+        if (this.options) {
+          var self = this;
+          for (var key in this.options) {
+            if (this.options.hasOwnProperty(key)) {
+              angular.forEach(self.breadcrumbs, function(breadcrumb) {
+                if (breadcrumb.label === key) {
+                  breadcrumb.label = self.options[key];
+                }
+              });
+            }
+          }
+        }
         return this.breadcrumbs;
       },
       generateBreadcrumbs: function() {

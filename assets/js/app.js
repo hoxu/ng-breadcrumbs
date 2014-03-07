@@ -37,7 +37,7 @@ require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
         .when('/stock/:stock/detail', {
           controller: 'StockDetailController',
           templateUrl: 'assets/template/stock-detail.html',
-          label: 'More Detail'
+          label: 'Stock Detail'
         })
         .otherwise({ redirectTo: '/' });
     }]);
@@ -49,6 +49,7 @@ require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
 
   app.controller('HomeController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs) {
     $scope.breadcrumbs = breadcrumbs;
+    $scope.breadcrumbs.options = {};
 
     $scope.summary = "This is the Home page.";
     $scope.stocks = app.stocks;
@@ -60,6 +61,7 @@ require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
   }]);
 
   app.controller('StockDetailController', ['$scope', '$routeParams', function($scope, $routeParams) {
+    $scope.breadcrumbs.options = { 'Stock Detail': $routeParams['stock'] + ' Details' };
     $scope.stock = app.stocks[$routeParams['stock']];
     $scope.summary = "This is the Stock Detail page.";
   }]);
