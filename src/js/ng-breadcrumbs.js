@@ -4,6 +4,8 @@
  *
  * @author Ian Kennington Walter (http://www.ianvonwalter.com)
  */
+
+/* global angular */
 angular
   .module('ng-breadcrumbs', [])
   .factory('breadcrumbs', ['$rootScope', '$location', '$route', function ($rootScope, $location, $route) {

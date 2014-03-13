@@ -56,13 +56,13 @@ require(['angular', 'angular-route', 'ng-breadcrumbs'], function(angular) {
   }]);
 
   app.controller('StockController', ['$scope', '$routeParams', function($scope, $routeParams) {
-    $scope.stock = app.stocks[$routeParams['stock']];
+    $scope.stock = app.stocks[$routeParams.stock];
     $scope.summary = "This is the Stock page.";
   }]);
 
   app.controller('StockDetailController', ['$scope', '$routeParams', function($scope, $routeParams) {
-    $scope.breadcrumbs.options = { 'Stock Detail': $routeParams['stock'] + ' Details' };
-    $scope.stock = app.stocks[$routeParams['stock']];
+    $scope.breadcrumbs.options = { 'Stock Detail': $routeParams.stock + ' Details' };
+    $scope.stock = app.stocks[$routeParams.stock];
     $scope.summary = "This is the Stock Detail page.";
   }]);
 
