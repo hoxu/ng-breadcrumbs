@@ -39,7 +39,7 @@ angular
             if (re.test(route)) {
               param = value;
             }
-            route = route.replace(re, ':' + key);
+            if (value) route = route.replace(re, ':' + key);
           });
           return { path: route, param: param };
         };
