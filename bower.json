@@ -16,7 +16,7 @@
   "license": "MIT",
   "homepage": "http://ianwalter.github.io/ng-breadcrumbs/",
   "main": [
-    "dist/js/ng-breadcrumbs.min.js",
+    "dist/ng-breadcrumbs.min.js",
     "README.md"
   ],
   "ignore": [
