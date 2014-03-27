@@ -1,6 +1,7 @@
 # [ng-breadcrumbs](http://ianwalter.github.io/ng-breadcrumbs/)
 *A better AngularJS service to help with breadcrumb-style navigation between views.*
 
+This project was built using [ng-boilerplate](https://github.com/ianwalter/ng-boilerplate)!
 
 #### Step 1: Install ng-breadcrumbs
 
@@ -64,4 +65,4 @@ That's it! You should now have breadcrumb navigation that can even handle nested
 
 I hope you find this useful!
 
-«–– [Ian](http://www.ianvonwalter.com)
+«–– [Ian](http://ianvonwalter.com)

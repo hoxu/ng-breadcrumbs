@@ -5,7 +5,7 @@
     <h4>Stocks:</h4>
   </div>
   <div class="list-group">
-    <a ng-repeat="stock in stocks track by stock.symbol"
+    <a ng-repeat="stock in stockService.stocks track by stock.symbol"
        ng-href="#/stock/{{ stock.symbol }}"
        class="list-group-item"
        ng-bind="stock.symbol"></a>
