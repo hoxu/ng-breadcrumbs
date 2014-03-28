@@ -23,7 +23,7 @@
     "**/.*",
     "node_modules",
     "test",
-    "assets",
+    "public",
     "src",
     "index.html",
     "gulpfile.js",

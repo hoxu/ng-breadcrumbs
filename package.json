@@ -2,7 +2,7 @@
   "name": "ng-breadcrumbs",
   "version": "0.0.7",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
-  "main": "dist/js/ng-breadcrumbs.min.js",
+  "main": "dist/ng-breadcrumbs.min.js",
   "devDependencies": {
     "gulp": "~3.5.1",
     "gulp-uglify": "~0.1.0",
