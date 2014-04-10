@@ -1,5 +1,5 @@
 /**
- * ng-breadcrumb.js - v0.0.6 - A better AngularJS service to help with breadcrumb-style navigation between views
+ * ng-breadcrumb.js - v0.0.8 - A better AngularJS service to help with breadcrumb-style navigation between views
  * Based on https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
@@ -15,10 +15,11 @@ angular
         if (this.options) {
           for (var key in this.options) {
             if (this.options.hasOwnProperty(key)) {
-              for (var breadcrumb in this.breadcrumbs) {
-                if (this.breadcrumbs.hasOwnProperty(breadcrumb)) {
+              for (var index in this.breadcrumbs) {
+                if (this.breadcrumbs.hasOwnProperty(index)) {
+                  var breadcrumb = this.breadcrumbs[index];
                   if (breadcrumb.label === key) {
-                    this.breadcrumbs[breadcrumb].label = this.options[key];
+                    breadcrumb.label = this.options[key];
                   }
                 }
               }
