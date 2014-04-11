@@ -6,6 +6,7 @@ module.exports = function(config) {
   var testFiles = [
     'public/js/requirejs-config.js',
     'test/unit/test-main.js',
+    { pattern: 'dist/**/*.js', included: false },
     { pattern: 'public/js/**/*.js', included: false },
     { pattern: 'public/lib/**/*.js', included: false }
   ];
@@ -68,7 +69,8 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
+    //browsers: ['Chrome'],
 
 
     // Continuous Integration mode

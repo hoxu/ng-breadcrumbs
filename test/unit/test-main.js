@@ -8,7 +8,7 @@ for (var file in window.__karma__.files) {
   }
 }
 
-requirejsConfig.baseUrl = '/base/public';
+requirejsConfig.baseUrl = '/base';
 requirejsConfig.deps = tests;
 requirejsConfig.callback = window.__karma__.start;
 

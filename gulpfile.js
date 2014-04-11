@@ -14,11 +14,11 @@ gulp.task('default', function() {
     gulp.run('uglify-js');
   });
 
-//  gulp.src(['undefined.js'])
-//    .pipe(karma({
-//      configFile: 'karma.conf.js',
-//      action: 'watch'
-//    }));
+  gulp.src(['undefined.js'])
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
+    }));
 });
 
 gulp.task('debug', function() {
@@ -29,11 +29,11 @@ gulp.task('debug', function() {
     gulp.run('copy-js');
   });
 
-//  gulp.src(['undefined.js'])
-//    .pipe(karma({
-//      configFile: 'karma.conf.js',
-//      action: 'watch'
-//    }));
+  gulp.src(['undefined.js'])
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
+    }));
 });
 
 gulp.task('uglify-js', function() {
@@ -59,13 +59,13 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-//gulp.task('test', function() {
-//  gulp.run('uglify-js');
-//
-//  // undefined.js: unfortunately necessary for now
-//  return gulp.src(['undefined.js'])
-//    .pipe(karma({
-//      configFile: 'karma.conf.js',
-//      action: 'run'
-//    }));
-//});
+gulp.task('test', function() {
+  gulp.run('uglify-js');
+
+  // undefined.js: unfortunately necessary for now
+  return gulp.src(['undefined.js'])
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }));
+});

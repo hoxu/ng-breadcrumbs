@@ -12,11 +12,15 @@ var requirejsConfig = {
     'ng-breadcrumbs': [
       'dist/ng-breadcrumbs.min',
       '//ianwalter.github.io/ng-breadcrumbs/dist/js/ng-breadcrumbs.min'
-    ]
+    ],
+    'angular-mocks': 'public/lib/angular-mocks/angular-mocks'
   },
   shim: {
     'angular' : { 'exports' : 'angular' },
     'angular-route': { deps:['angular'] },
-    'ng-breadcrumbs': { deps:['angular'] }
+    'ng-breadcrumbs': { deps:['angular'] },
+    'angular-mocks': {
+      deps: ['angular']
+    }
   }
 };

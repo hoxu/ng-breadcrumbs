@@ -11,7 +11,8 @@ angular
   .factory('breadcrumbs', ['$rootScope', '$location', '$route', function ($rootScope, $location, $route) {
     var BreadcrumbService = {
       breadcrumbs: [],
-      get: function() {
+      get: function(options) {
+        this.options = options || this.options;
         if (this.options) {
           for (var key in this.options) {
             if (this.options.hasOwnProperty(key)) {
@@ -30,22 +31,24 @@ angular
       },
       generateBreadcrumbs: function() {
         var routes = $route.routes,
-          pathElements = $location.path().split('/'),
-          path = '',
-          self = this;
+            pathElements = $location.path().split('/'),
+            path = '',
+            self = this;
 
         var getRoute = function(route) {
-          var param;
-          angular.forEach($route.current.params, function(value, key) {
-            var re = new RegExp(value);
-            if (re.test(route)) {
-              param = value;
-            }
-            if (value) {
-              route = route.replace(re, ':' + key);
-            }
-          });
-          return { path: route, param: param };
+          if ($route.current) {
+            var param;
+            angular.forEach($route.current.params, function (value, key) {
+              var re = new RegExp(value);
+              if (re.test(route)) {
+                param = value;
+              }
+              if (value) {
+                route = route.replace(re, ':' + key);
+              }
+            });
+            return { path: route, param: param };
+          }
         };
 
         if (pathElements[1] === '') {
@@ -56,7 +59,7 @@ angular
         angular.forEach(pathElements, function(el) {
           path += path === '/' ? el : '/' + el;
           var route = getRoute(path);
-          if (routes[route.path]) {
+          if (route && routes[route.path]) {
             var label = routes[route.path].label || route.param;
             self.breadcrumbs.push({ label: label, path: path });
           }
@@ -69,6 +72,8 @@ angular
     $rootScope.$on('$routeChangeSuccess', function() {
       BreadcrumbService.generateBreadcrumbs();
     });
+
+    BreadcrumbService.generateBreadcrumbs();
 
     return BreadcrumbService;
   }]);

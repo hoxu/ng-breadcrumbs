@@ -63,6 +63,17 @@ unlinked.
 
 That's it! You should now have breadcrumb navigation that can even handle nested routes.
 
+
+#### Adding dynamic route labels
+
+To add dynamic route labels, create an options object on the breadcrumbs service or pass one as a parameter within
+```breadcrumbs.get()```, for example:
+
+```javascript
+// Will replace the default label 'Stock Detail' with the dynamic label 'AAPL Details'
+breadcrumbs.options = { 'Stock Detail': $routeParams.stock + ' Details' };
+```
+
 I hope you find this useful!
 
 «–– [Ian](http://ianvonwalter.com)
