@@ -1,6 +1,6 @@
 {
   "name": "ng-breadcrumbs",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "main": "dist/ng-breadcrumbs.min.js",
   "devDependencies": {
@@ -18,7 +18,8 @@
     "karma-phantomjs-launcher": "~0.1.2",
     "karma-chrome-launcher": "~0.1.2",
     "chai": "~1.9.0",
-    "karma-chai": "~0.1.0"
+    "karma-chai": "~0.1.0",
+    "gulp-connect": "^2.0.5"
   },
   "scripts": {
     "test": "gulp test"

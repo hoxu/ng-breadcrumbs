@@ -4,11 +4,10 @@ var path = require('path'),
     jshint = require('gulp-jshint'),
     concat = require('gulp-concat'),
     karma = require('gulp-karma'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    connect = require('gulp-connect');
 
-gulp.task('default', function() {
-  gulp.run('uglify-js', 'lint');
-
+gulp.task('default', ['uglify-js', 'lint', 'connect'], function() {
   gulp.watch('src/**/*.js', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     gulp.run('uglify-js');
@@ -21,9 +20,7 @@ gulp.task('default', function() {
     }));
 });
 
-gulp.task('debug', function() {
-  gulp.run('copy-js', 'lint');
-
+gulp.task('debug', ['copy-js', 'lint', 'connect'], function() {
   gulp.watch('src/**/*.js', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     gulp.run('copy-js');
@@ -42,7 +39,8 @@ gulp.task('uglify-js', function() {
     .pipe(gulp.dest('dist'))
     .pipe(uglify())
     .pipe(rename('ng-breadcrumbs.min.js'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'))
+    .pipe(connect.reload());
 });
 
 gulp.task('copy-js', function() {
@@ -50,7 +48,8 @@ gulp.task('copy-js', function() {
     .pipe(concat('ng-breadcrumbs.js'))
     .pipe(gulp.dest('dist'))
     .pipe(rename('ng-breadcrumbs.min.js'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist'))
+    .pipe(connect.reload());
 });
 
 gulp.task('lint', function() {
@@ -68,4 +67,15 @@ gulp.task('test', function() {
       configFile: 'karma.conf.js',
       action: 'run'
     }));
+});
+
+gulp.task('connect', function() {
+  gulp.watch(['public/**/*', 'index.html'], function() {
+    gulp.src(['public/**/*', 'index.html'])
+      .pipe(connect.reload());
+  });
+
+  connect.server({
+    livereload: true
+  });
 });
