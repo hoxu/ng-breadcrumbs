@@ -39,12 +39,11 @@ angular
           if ($route.current) {
             var param;
             angular.forEach($route.current.params, function (value, key) {
-              var re = new RegExp(value);
-              if (re.test(route)) {
+              if (route.indexOf(value) !== -1) {
                 param = value;
               }
-              if (value) {
-                route = route.replace(re, ':' + key);
+              if (param) {
+                route = route.replace(value, ':' + key);
               }
             });
             return { path: route, param: param };
