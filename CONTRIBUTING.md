@@ -7,7 +7,7 @@ files and running a development server. You'll need to run ```npm install``` in 
 dependencies and ```npm install -g gulp``` in order to install [gulp](http://gulpjs.com). The development server should
 be available at [http://localhost:8080/](http://localhost:8080/).
 4. Increment the version number in package.json, bower.json, and src/ng-breadcrumbs.js
-5. Create pull requests on the development branch not master!
+5. Create pull requests on the **development** branch not master!
 
 Thank you for your contribution!
 
