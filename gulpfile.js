@@ -1,37 +1,22 @@
 var path = require('path'),
     gulp = require('gulp'),
     uglify = require('gulp-uglify'),
-    jshint = require('gulp-jshint'),
-    concat = require('gulp-concat'),
+    connect = require('gulp-connect'),
     karma = require('gulp-karma'),
+    jshint = require('gulp-jshint'),
+    webdriverUpdate = require("gulp-protractor").webdriver_update,
+    protractor = require("gulp-protractor").protractor,
+    concat = require('gulp-concat'),
     rename = require('gulp-rename'),
-    connect = require('gulp-connect');
+    debug = false,
+    WATCH_MODE = 'watch',
+    RUN_MODE = 'run';
 
-gulp.task('default', ['uglify-js', 'lint', 'connect'], function() {
-  gulp.watch('src/**/*.js', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    gulp.run('uglify-js');
-  });
+var mode = WATCH_MODE;
 
-  gulp.src(['undefined.js'])
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
-});
-
-gulp.task('debug', ['copy-js', 'lint', 'connect'], function() {
-  gulp.watch('src/**/*.js', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    gulp.run('copy-js');
-  });
-
-  gulp.src(['undefined.js'])
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'watch'
-    }));
-});
+function changeNotification(event) {
+  console.log('File', event.path, 'was', event.type, ', running tasks...');
+}
 
 gulp.task('uglify-js', function() {
   gulp.src('src/**/*.js')
@@ -52,22 +37,51 @@ gulp.task('copy-js', function() {
     .pipe(connect.reload());
 });
 
-gulp.task('lint', function() {
-  gulp.src('src/**/*.js')
+gulp.task('lint', function () {
+  gulp.src('src/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', function() {
-  gulp.run('uglify-js');
-
+gulp.task('karma', function() {
   // undefined.js: unfortunately necessary for now
-  return gulp.src(['undefined.js'])
+  gulp.src(['undefined.js'])
     .pipe(karma({
       configFile: 'karma.conf.js',
-      action: 'run'
-    }));
+      action: mode
+    }))
+    .on('error', function() {});
 });
+
+gulp.task('protractor', ['webdriver-update'], function(callback) {
+  gulp.src(["./src/tests/*.js"])
+    .pipe(protractor({
+      configFile: 'protractor.conf.js',
+      args: ['--baseUrl', 'http://127.0.0.1:8080']
+    }))
+    .on('end', function() {
+      callback();
+    })
+    .on('error', function(err) {
+      callback(err);
+    });
+});
+
+gulp.task('webdriver-update', webdriverUpdate);
+
+function build() {
+  var jsTask = debug ? 'copy-js' : 'uglify-js';
+
+  var jsWatcher = gulp.watch('src/js/**/*.js', [jsTask, 'karma', 'protractor']),
+      testWatcher = gulp.watch('test/**/*.js', ['karma', 'protractor']);
+
+  jsWatcher.on('change', changeNotification);
+  testWatcher.on('change', changeNotification);
+}
+
+gulp.task('default', ['uglify-js', 'lint', 'karma', 'protractor'], build);
+
+gulp.task('debug', ['debug-mode', 'copy-js', 'lint', 'karma', 'protractor'], build);
 
 gulp.task('connect', function() {
   gulp.watch(['public/**/*', 'index.html'], function() {
@@ -79,3 +93,19 @@ gulp.task('connect', function() {
     livereload: true
   });
 });
+
+gulp.task('server', ['connect', 'default']);
+
+gulp.task('kill-connect', ['protractor'], function() {
+  connect.serverClose();
+});
+
+gulp.task('run-mode', function() {
+  mode = RUN_MODE;
+});
+
+gulp.task('debug-mode', function() {
+  debug = true;
+});
+
+gulp.task('test', ['run-mode', 'connect', 'uglify-js', 'karma', 'protractor', 'kill-connect']);

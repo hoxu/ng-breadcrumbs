@@ -11,6 +11,8 @@
     "gulp-rename": "~1.2.0",
     "karma": "~0.12.1",
     "gulp-karma": "0.0.4",
+    "gulp-protractor": "0.0.7",
+    "protractor": "^0.22.0",
     "mocha": "~1.17.1",
     "karma-mocha": "~0.1.1",
     "requirejs": "~2.1.11",
@@ -23,6 +25,10 @@
   },
   "scripts": {
     "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ianwalter/ng-breadcrumbs.git"
   },
   "keywords": [
     "ng-breadcrumbs",
