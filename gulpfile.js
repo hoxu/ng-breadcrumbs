@@ -14,30 +14,18 @@ var path = require('path'),
 
 var mode = WATCH_MODE;
 
-function changeNotification(event) {
-  console.log('File', event.path, 'was', event.type, ', running tasks...');
-}
-
-gulp.task('uglify-js', function() {
-  gulp.src('src/**/*.js')
+gulp.task('js', function() {
+  var jsTask = gulp.src('src/**/*.js')
     .pipe(concat('ng-breadcrumbs.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(uglify())
-    .pipe(rename('ng-breadcrumbs.min.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(connect.reload());
+    .pipe(gulp.dest('dist'));
+  if (!debug) {
+    jsTask.pipe(uglify());
+  }
+  jsTask.pipe(rename('ng-breadcrumbs.min.js'))
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy-js', function() {
-  gulp.src('src/**/*.js')
-    .pipe(concat('ng-breadcrumbs.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(rename('ng-breadcrumbs.min.js'))
-    .pipe(gulp.dest('dist'))
-    .pipe(connect.reload());
-});
-
-gulp.task('lint', function () {
+gulp.task('lint', function() {
   gulp.src('src/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
@@ -59,29 +47,11 @@ gulp.task('protractor', ['webdriver-update'], function(callback) {
       configFile: 'protractor.conf.js',
       args: ['--baseUrl', 'http://127.0.0.1:8080']
     }))
-    .on('end', function() {
-      callback();
-    })
-    .on('error', function(err) {
-      callback(err);
-    });
+    .on('end', function() { callback(); })
+    .on('error', function() { callback(); });
 });
 
 gulp.task('webdriver-update', webdriverUpdate);
-
-function build() {
-  var jsTask = debug ? 'copy-js' : 'uglify-js';
-
-  var jsWatcher = gulp.watch('src/js/**/*.js', [jsTask, 'karma', 'protractor']),
-      testWatcher = gulp.watch('test/**/*.js', ['karma', 'protractor']);
-
-  jsWatcher.on('change', changeNotification);
-  testWatcher.on('change', changeNotification);
-}
-
-gulp.task('default', ['uglify-js', 'lint', 'karma', 'protractor'], build);
-
-gulp.task('debug', ['debug-mode', 'copy-js', 'lint', 'karma', 'protractor'], build);
 
 gulp.task('connect', function() {
   gulp.watch(['public/**/*', 'index.html'], function() {
@@ -94,8 +64,6 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('server', ['connect', 'default']);
-
 gulp.task('kill-connect', ['protractor'], function() {
   connect.serverClose();
 });
@@ -104,8 +72,26 @@ gulp.task('run-mode', function() {
   mode = RUN_MODE;
 });
 
-gulp.task('debug-mode', function() {
+gulp.task('debug', function() {
   debug = true;
 });
 
-gulp.task('test', ['run-mode', 'connect', 'uglify-js', 'karma', 'protractor', 'kill-connect']);
+function changeNotification(event) {
+  console.log('File', event.path, 'was', event.type, ', running tasks...');
+}
+
+function watch() {
+  var jsWatcher = gulp.watch('src/js/**/*.js', ['js', 'karma', 'protractor']),
+      testWatcher = gulp.watch('test/**/*.js', ['karma', 'protractor']);
+
+  jsWatcher.on('change', changeNotification);
+  testWatcher.on('change', changeNotification);
+}
+
+gulp.task('all', ['js', 'lint', 'karma', 'protractor']);
+
+gulp.task('default', ['all'], watch);
+
+gulp.task('server', ['connect', 'default']);
+
+gulp.task('test', ['run-mode', 'debug', 'connect', 'all', 'kill-connect']);

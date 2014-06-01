@@ -11,7 +11,7 @@ var requirejsConfig = {
     ],
     'ng-breadcrumbs': [
       'dist/ng-breadcrumbs.min',
-      '//ianwalter.github.io/ng-breadcrumbs/dist/js/ng-breadcrumbs.min'
+      '//ianwalter.github.io/ng-breadcrumbs/dist/ng-breadcrumbs.min'
     ],
     'angular-mocks': 'public/lib/angular-mocks/angular-mocks'
   },
