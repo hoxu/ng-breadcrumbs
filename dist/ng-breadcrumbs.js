@@ -1,5 +1,5 @@
 /**
- * ng-breadcrumb.js - v0.1.0 - A better AngularJS service to help with breadcrumb-style navigation between views
+ * ng-breadcrumb.js - v0.1.1 - A better AngularJS service to help with breadcrumb-style navigation between views
  * Based on https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
@@ -60,7 +60,10 @@ angular
           var route = getRoute(path);
           if (route && routes[route.path]) {
             var label = routes[route.path].label || route.param;
-            self.breadcrumbs.push({ label: label, path: path });
+            var name = routes[route.path].name || '';
+            self.breadcrumbs.push({
+                label: label, path: path, name: name, param: route.param
+            });
           }
         });
       }
