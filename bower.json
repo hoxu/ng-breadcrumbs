@@ -1,6 +1,6 @@
 {
   "name": "ng-breadcrumbs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "keywords": [
     "ng-breadcrumbs",
