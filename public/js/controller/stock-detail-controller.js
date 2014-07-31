@@ -16,14 +16,20 @@ define(
       .controller('StockDetailController', [
         '$scope',
         '$routeParams',
+        '$timeout',
         'breadcrumbs',
         'StockService',
-        function($scope, $routeParams, breadcrumbs, StockService) {
+        function($scope, $routeParams, $timeout, breadcrumbs, StockService) {
+          breadcrumbs.options = { 'Stock Detail': $routeParams.stock + ' Details' };
           $scope.breadcrumbs = breadcrumbs;
-          $scope.breadcrumbs.options = { 'Stock Detail': $routeParams.stock + ' Details' };
+
+          // NOTE: This is for illustration purposes only
+          $timeout(function() {
+            breadcrumbs.options = { 'Home': 'Home!' };
+          }, 1200);
 
           $scope.stock = StockService.stocks[$routeParams.stock];
-          $scope.summary = "This is the Stock Detail page.";
+          $scope.summary = 'This is the Stock Detail page.';
         }
       ]);
   }

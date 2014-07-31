@@ -31,9 +31,9 @@ angular
       },
       generateBreadcrumbs: function() {
         var routes = $route.routes,
-            pathElements = $location.path().split('/'),
-            path = '',
-            self = this;
+          pathElements = $location.path().split('/'),
+          path = '',
+          self = this;
 
         var getRoute = function(route) {
           if ($route.current) {
@@ -72,6 +72,10 @@ angular
     // We want to update breadcrumbs only when a route is actually changed
     // as $location.path() will get updated immediately (even if route change fails!)
     $rootScope.$on('$routeChangeSuccess', function() {
+      BreadcrumbService.generateBreadcrumbs();
+    });
+
+    $rootScope.$watch(function() { return BreadcrumbService.options; }, function() {
       BreadcrumbService.generateBreadcrumbs();
     });
 
