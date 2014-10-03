@@ -22,8 +22,11 @@ define(
       ])
       .config(['$routeProvider', function($routeProvider) {
         $routeProvider
-          .when('/', { controller: 'HomeController', templateUrl: 'public/template/home.html', label: 'Home' })
-          .when('/stock/:stock', { controller: 'StockController', templateUrl: 'public/template/stock.html' })
+          .when('/', { controller: 'HomeController',
+                       templateUrl: 'public/template/home.html',
+                       label: 'Home' })
+          .when('/stock/:stock', { controller: 'StockController',
+                                   templateUrl: 'public/template/stock.html' })
           .when('/stock/:stock/detail', {
             controller: 'StockDetailController',
             templateUrl: 'public/template/stock-detail.html',

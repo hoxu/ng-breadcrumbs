@@ -1,18 +1,28 @@
-var path = require('path'),
-    gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    connect = require('gulp-connect'),
-    karma = require('gulp-karma'),
-    jshint = require('gulp-jshint'),
-    webdriverUpdate = require("gulp-protractor").webdriver_update,
-    protractor = require("gulp-protractor").protractor,
-    concat = require('gulp-concat'),
-    rename = require('gulp-rename'),
-    debug = false,
-    WATCH_MODE = 'watch',
-    RUN_MODE = 'run';
+var gulp = require('gulp'),
+  uglify = require('gulp-uglify'),
+  connect = require('gulp-connect'),
+  karma = require('gulp-karma'),
+  jshint = require('gulp-jshint'),
+  protractor = require("gulp-protractor").protractor,
+  concat = require('gulp-concat'),
+  rename = require('gulp-rename'),
+  program = require('commander'),
+  debug = false,
+  WATCH_MODE = 'watch',
+  RUN_MODE = 'run';
 
-var mode = WATCH_MODE;
+var mode = RUN_MODE;
+
+function list(val) {
+  return val.split(',');
+}
+
+program
+  .version('0.0.1')
+  .option('-t, --tests [glob]', 'Specify which tests to run')
+  .option('-b, --browsers <items>', 'Specify which browsers to run on', list)
+  .option('-r, --reporters <items>', 'Specify which reporters to use', list)
+  .parse(process.argv);
 
 gulp.task('js', function() {
   var jsTask = gulp.src('src/**/*.js')
@@ -21,7 +31,8 @@ gulp.task('js', function() {
   if (!debug) {
     jsTask.pipe(uglify());
   }
-  jsTask.pipe(rename('ng-breadcrumbs.min.js'))
+  jsTask
+    .pipe(rename('ng-breadcrumbs.min.js'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -31,28 +42,6 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('karma', function() {
-  // undefined.js: unfortunately necessary for now
-  gulp.src(['undefined.js'])
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: mode
-    }))
-    .on('error', function() {});
-});
-
-gulp.task('protractor', ['webdriver-update'], function(callback) {
-  gulp.src(["./src/tests/*.js"])
-    .pipe(protractor({
-      configFile: 'protractor.conf.js',
-      args: ['--baseUrl', 'http://127.0.0.1:8080']
-    }))
-    .on('end', function() { callback(); })
-    .on('error', function() { callback(); });
-});
-
-gulp.task('webdriver-update', webdriverUpdate);
-
 gulp.task('connect', function() {
   gulp.watch(['public/**/*', 'index.html'], function() {
     gulp.src(['public/**/*', 'index.html'])
@@ -60,38 +49,64 @@ gulp.task('connect', function() {
   });
 
   connect.server({
-    livereload: true
+    livereload: mode === WATCH_MODE
   });
 });
 
-gulp.task('kill-connect', ['protractor'], function() {
-  connect.serverClose();
+gulp.task('karma', ['js'], function() {
+  // undefined.js: unfortunately necessary for now
+  gulp.src(['undefined.js'])
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: mode,
+      tests: program.tests,
+      reporters: program.reporters || ['progress'],
+      browsers: program.browsers || ['PhantomJS']
+    }))
+    .on('error', function() {});
 });
 
-gulp.task('run-mode', function() {
-  mode = RUN_MODE;
+gulp.task('protractor', function(done) {
+  gulp.src(["./src/tests/*.js"])
+    .pipe(protractor({
+      configFile: 'protractor.conf.js',
+      args: [
+        '--baseUrl', 'http://127.0.0.1:8080',
+        '--browser', program.browsers ? program.browsers[0] : 'phantomjs'
+      ]
+    }))
+    .on('end', function() {
+      if (mode === RUN_MODE) {
+        connect.serverClose();
+      }
+      done();
+    })
+    .on('error', function() { done(); });
 });
 
 gulp.task('debug', function() {
   debug = true;
 });
 
-function changeNotification(event) {
-  console.log('File', event.path, 'was', event.type, ', running tasks...');
-}
+gulp.task('watch-mode', function() {
+  mode = WATCH_MODE;
+});
 
 function watch() {
   var jsWatcher = gulp.watch('src/js/**/*.js', ['js', 'karma', 'protractor']),
-      testWatcher = gulp.watch('test/**/*.js', ['karma', 'protractor']);
+    karmaWatcher = gulp.watch('test/unit/**/*.js', ['karma']),
+    protractorWatcher = gulp.watch('test/ui/**/*.js', ['protractor']);
+
+  function changeNotification(event) {
+    console.log('File', event.path, 'was', event.type, ', running tasks...');
+  }
 
   jsWatcher.on('change', changeNotification);
-  testWatcher.on('change', changeNotification);
+  karmaWatcher.on('change', changeNotification);
+  protractorWatcher.on('change', changeNotification);
 }
 
 gulp.task('all', ['js', 'lint', 'karma', 'protractor']);
-
-gulp.task('default', ['all'], watch);
-
+gulp.task('default', ['watch-mode', 'all'], watch);
 gulp.task('server', ['connect', 'default']);
-
-gulp.task('test', ['run-mode', 'debug', 'connect', 'all', 'kill-connect']);
+gulp.task('test', ['debug', 'connect', 'all']);

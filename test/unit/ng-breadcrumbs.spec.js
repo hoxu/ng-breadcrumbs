@@ -10,39 +10,34 @@ define(
 
       beforeEach(module('ng-breadcrumbs-demo'));
 
-      var breadcrumbService, http, route, location;
+      var breadcrumbs, $httpBackend, $route, $location;
 
-      // Mock the current location
-      beforeEach(inject(function($location) {
-        location = $location;
-        location.$$path = '/stock/AAPL/detail';
+      beforeEach(inject(function(_$location_, _$route_) {
+        $location = _$location_;
+        $route = _$route_;
+        $location.$$path = '/stock/a/detail';
+        $route.current = { params: { stock: 'AAPL' } };
       }));
 
-      // Mock the current route
-      beforeEach(inject(function($route) {
-        route = $route;
-        route.current = { params: { stock: 'AAPL' } };
-      }));
-
-      beforeEach(inject(function(breadcrumbs, $httpBackend) {
-        breadcrumbService = breadcrumbs;
-        http = $httpBackend;
+      beforeEach(inject(function(_breadcrumbs_, _$httpBackend_) {
+        breadcrumbs = _breadcrumbs_;
+        $httpBackend = _$httpBackend_;
       }));
 
       describe('#get()', function() {
         it('should return a collection of breadcrumb objects with their default labels', function() {
-          var breadcrumbs = breadcrumbService.get();
-          expect(breadcrumbs).to.have.length.above(0);
-          expect(breadcrumbs[0].label).to.equal('Home');
-          expect(breadcrumbs[1].label).to.equal('AAPL');
-          expect(breadcrumbs[2].label).to.equal('Stock Detail');
+          var crumbs = breadcrumbs.get();
+          expect(crumbs).to.have.length.above(0);
+          expect(crumbs[0].label).to.equal('Home');
+          expect(crumbs[1].label).to.equal('AAPL');
+          expect(crumbs[2].label).to.equal('Stock Detail');
         });
       });
 
       describe('#get(options)', function() {
         it('should return a collection of breadcrumb objects with the specified labels', function() {
-          var breadcrumbs = breadcrumbService.get({ 'Stock Detail': 'AAPL Details' });
-          expect(breadcrumbs[2].label).to.equal('AAPL Details');
+          var crumbs = breadcrumbs.get({ 'Stock Detail': 'AAPL Details' });
+          expect(crumbs[2].label).to.equal('AAPL Details');
         });
       });
 
