@@ -15,8 +15,8 @@ define(
       beforeEach(inject(function(_$location_, _$route_) {
         $location = _$location_;
         $route = _$route_;
-        $location.$$path = '/stock/a/detail';
-        $route.current = { params: { stock: 'AAPL' } };
+        $location.$$path = '/stock/o/detail';
+        $route.current = { params: { stock: 'o' } };
       }));
 
       beforeEach(inject(function(_breadcrumbs_, _$httpBackend_) {
@@ -29,7 +29,7 @@ define(
           var crumbs = breadcrumbs.get();
           expect(crumbs).to.have.length.above(0);
           expect(crumbs[0].label).to.equal('Home');
-          expect(crumbs[1].label).to.equal('AAPL');
+          expect(crumbs[1].label).to.equal('o');
           expect(crumbs[2].label).to.equal('Stock Detail');
         });
       });
