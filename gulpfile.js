@@ -43,10 +43,12 @@ gulp.task('lint', function() {
 });
 
 gulp.task('connect', function() {
-  gulp.watch(['public/**/*', 'index.html'], function() {
-    gulp.src(['public/**/*', 'index.html'])
-      .pipe(connect.reload());
-  });
+  if (mode === WATCH_MODE) {
+    gulp.watch(['public/**/*', 'index.html'], function() {
+      gulp.src(['public/**/*', 'index.html'])
+        .pipe(connect.reload());
+    });
+  }
 
   connect.server({
     livereload: mode === WATCH_MODE
@@ -107,4 +109,4 @@ gulp.task('watch-mode', function() {
 gulp.task('all', ['js', 'lint', 'karma', 'protractor']);
 gulp.task('default', ['watch-mode', 'all']);
 gulp.task('server', ['connect', 'default']);
-gulp.task('test', ['debug', 'connect', 'all']);
+gulp.task('test', ['connect', 'all']);
