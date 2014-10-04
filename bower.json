@@ -1,6 +1,6 @@
 {
   "name": "ng-breadcrumbs",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A better AngularJS service to help with breadcrumb-style navigation between views",
   "keywords": [
     "ng-breadcrumbs",
@@ -37,6 +37,7 @@
     "angular": "1.2.11"
   },
   "devDependencies": {
-    "angular-mocks": "v1.2.11"
+    "angular-mocks": "v1.2.11",
+    "requirejs": "~2.1.15"
   }
 }

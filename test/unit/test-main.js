@@ -8,6 +8,11 @@ for (var file in window.__karma__.files) {
   }
 }
 
+requirejsConfig.paths['angular-mocks'] = 'public/lib/angular-mocks/angular-mocks';
+requirejsConfig.shim['angular-mocks'] = {
+  deps: ['angular']
+};
+
 requirejsConfig.baseUrl = '/base';
 requirejsConfig.deps = tests;
 requirejsConfig.callback = window.__karma__.start;
