@@ -8,6 +8,7 @@ define(
     'angular',
     'angular-route',
     'public/js/controller/home-controller',
+    'public/js/controller/stock-history-controller',
     'public/js/controller/stock-controller',
     'public/js/controller/stock-detail-controller'
   ],
@@ -17,6 +18,7 @@ define(
     angular.module('ng-breadcrumbs-demo', [
         'ngRoute',
         'ng-breadcrumbs-demo.home-controller',
+        'ng-breadcrumbs-demo.stock-history-controller',
         'ng-breadcrumbs-demo.stock-controller',
         'ng-breadcrumbs-demo.stock-detail-controller'
       ])
@@ -32,6 +34,15 @@ define(
             templateUrl: 'public/template/stock-detail.html',
             label: 'Stock Detail'
           })
+          .when('/stock/:stock/history', {
+            controller: 'StockHistoryController',
+            templateUrl: 'public/template/stock-history.html'
+          })
+// TODO add route and test for multiple params
+//          .when('/stock/:stock/history/:year/:month', {
+//            controller: 'StockHistoryController',
+//            templateUrl: 'public/template/stock-history.html'
+//          })
           .otherwise({ redirectTo: '/' });
       }]);
   }

@@ -90,12 +90,10 @@ gulp.task('debug', function() {
 
 gulp.task('watch-mode', function() {
   mode = WATCH_MODE;
-});
 
-function watch() {
-  var jsWatcher = gulp.watch('src/js/**/*.js', ['js', 'karma', 'protractor']),
-    karmaWatcher = gulp.watch('test/unit/**/*.js', ['karma']),
-    protractorWatcher = gulp.watch('test/ui/**/*.js', ['protractor']);
+  var jsWatcher = gulp.watch('src/**/*.js', ['js', 'karma', 'protractor']),
+      karmaWatcher = gulp.watch('test/unit/**/*.js', ['karma']),
+      protractorWatcher = gulp.watch('test/ui/**/*.js', ['protractor']);
 
   function changeNotification(event) {
     console.log('File', event.path, 'was', event.type, ', running tasks...');
@@ -104,9 +102,9 @@ function watch() {
   jsWatcher.on('change', changeNotification);
   karmaWatcher.on('change', changeNotification);
   protractorWatcher.on('change', changeNotification);
-}
+});
 
 gulp.task('all', ['js', 'lint', 'karma', 'protractor']);
-gulp.task('default', ['watch-mode', 'all'], watch);
+gulp.task('default', ['watch-mode', 'all']);
 gulp.task('server', ['connect', 'default']);
 gulp.task('test', ['debug', 'connect', 'all']);

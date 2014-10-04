@@ -20,12 +20,15 @@ define(
         'breadcrumbs',
         'StockService',
         function($scope, $routeParams, $timeout, breadcrumbs, StockService) {
-          breadcrumbs.options = { 'Stock Detail': $routeParams.stock + ' Details' };
+          breadcrumbs.options = {
+            'Stock Detail': $routeParams.stock + ' Details'
+          };
           $scope.breadcrumbs = breadcrumbs;
 
           // NOTE: This is for illustration purposes only
           $timeout(function() {
-            breadcrumbs.options = { 'Home': 'Home!' };
+            breadcrumbs.options =
+              angular.extend(breadcrumbs.options, { 'Home': 'Home!' });
           }, 1200);
 
           $scope.stock = StockService.stocks[$routeParams.stock];
