@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   rename = require('gulp-rename'),
   program = require('commander'),
+  stylish = require('jshint-stylish'),
   debug = false,
   WATCH_MODE = 'watch',
   RUN_MODE = 'run';
@@ -38,8 +39,8 @@ gulp.task('js', function() {
 
 gulp.task('lint', function() {
   gulp.src('src/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('connect', function() {
