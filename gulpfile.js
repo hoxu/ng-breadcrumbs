@@ -38,7 +38,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('lint', function() {
-  gulp.src('src/**/*.js')
+  gulp.src(['src/**/*.js', 'test/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish));
 });
@@ -94,8 +94,8 @@ gulp.task('debug', function() {
 gulp.task('watch-mode', function() {
   mode = WATCH_MODE;
 
-  var jsWatcher = gulp.watch('src/**/*.js', ['js', 'lint', 'karma',
-                                             'protractor']),
+  var jsWatcher = gulp.watch(['src/**/*.js'], ['js']),
+      jshintWatcher = gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint']),
       karmaWatcher = gulp.watch('test/unit/**/*.js', ['karma']),
       protractorWatcher = gulp.watch('test/ui/**/*.js', ['protractor']);
 
@@ -104,6 +104,7 @@ gulp.task('watch-mode', function() {
   }
 
   jsWatcher.on('change', changeNotification);
+  jshintWatcher.on('change', changeNotification);
   karmaWatcher.on('change', changeNotification);
   protractorWatcher.on('change', changeNotification);
 });

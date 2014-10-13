@@ -8,7 +8,9 @@ for (var file in window.__karma__.files) {
   }
 }
 
-requirejsConfig.paths['angular-mocks'] = 'public/lib/angular-mocks/angular-mocks';
+requirejsConfig.paths['angular-mocks'] =
+  'public/lib/angular-mocks/angular-mocks';
+
 requirejsConfig.shim['angular-mocks'] = {
   deps: ['angular']
 };

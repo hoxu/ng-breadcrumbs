@@ -13,5 +13,6 @@
   "undef": true,
   "unused": true,
   "eqnull": true,
-  "predef": ["angular"]
+  "predef": ["angular", "describe", "it", "browser", "by", "expect", "define",
+             "requirejs", "requirejsConfig", "beforeEach", "inject", "element"]
 }

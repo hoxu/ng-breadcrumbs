@@ -6,6 +6,8 @@ define(
     'ng-breadcrumbs'
   ],
   function() {
+    'use strict';
+
     describe('breadcrumbs', function() {
 
       beforeEach(module('ng-breadcrumbs-demo'));
@@ -25,7 +27,8 @@ define(
       }));
 
       describe('#get()', function() {
-        it('should return a collection of breadcrumb objects with their default labels', function() {
+        it('should return a collection of breadcrumb objects with their ' +
+           'default labels', function() {
           var crumbs = breadcrumbs.get();
           expect(crumbs).to.have.length.above(0);
           expect(crumbs[0].label).to.equal('Home');
@@ -35,7 +38,8 @@ define(
       });
 
       describe('#get(options)', function() {
-        it('should return a collection of breadcrumb objects with the specified labels', function() {
+        it('should return a collection of breadcrumb objects with the ' +
+           'specified labels', function() {
           var crumbs = breadcrumbs.get({ 'Stock Detail': 'AAPL Details' });
           expect(crumbs[2].label).to.equal('AAPL Details');
         });
