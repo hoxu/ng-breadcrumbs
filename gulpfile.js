@@ -94,7 +94,8 @@ gulp.task('debug', function() {
 gulp.task('watch-mode', function() {
   mode = WATCH_MODE;
 
-  var jsWatcher = gulp.watch('src/**/*.js', ['js', 'karma', 'protractor']),
+  var jsWatcher = gulp.watch('src/**/*.js', ['js', 'lint', 'karma',
+                                             'protractor']),
       karmaWatcher = gulp.watch('test/unit/**/*.js', ['karma']),
       protractorWatcher = gulp.watch('test/ui/**/*.js', ['protractor']);
 
