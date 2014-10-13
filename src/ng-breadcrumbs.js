@@ -1,5 +1,5 @@
 /**
- * ng-breadcrumb.js - v0.1.2 - A better AngularJS service to help with breadcrumb-style navigation between views
+ * ng-breadcrumb.js - v0.2.0 - A better AngularJS service to help with breadcrumb-style navigation between views
  * Based on https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
@@ -35,17 +35,31 @@ angular
           path = '',
           self = this;
 
-        var getRoute = function(route) {
+        var getRoute = function(path) {
           if ($route.current) {
-            var param;
+            var param,
+                isParamLastFragment,
+                re,
+                lastParamRe,
+                route,
+                pathDef = path;
             angular.forEach($route.current.params, function (value, key) {
-              var re = new RegExp('\/' + value + '(\/|$)', 'g');
-              if (route.match(re)) {
+              re = new RegExp('\/' + value + '(\/|$)', 'g');
+              lastParamRe = new RegExp('\/' + value + '(\/$|$)', 'g');
+              if (pathDef.match(re)) {
                 param = value;
               }
-              route = route.replace(re, '/:' + key + '$1');
+              isParamLastFragment = pathDef.match(lastParamRe);
+              pathDef = pathDef.replace(re, '/:' + key + '$1');
             });
-            return { path: route, param: param };
+            route = routes[pathDef];
+            param = isParamLastFragment && !route.excludeBreadcrumb ? param :
+              false;
+            if (route) {
+              return { path: path,
+                       label: route.label || param,
+                       param: param };
+            }
           }
         };
 
@@ -57,12 +71,8 @@ angular
         angular.forEach(pathElements, function(el) {
           path += path === '/' ? el : '/' + el;
           var route = getRoute(path);
-          if (route && routes[route.path]) {
-            var label = routes[route.path].label || route.param;
-            var name = routes[route.path].name || '';
-            self.breadcrumbs.push({
-                label: label, path: path, name: name, param: route.param
-            });
+          if (route) {
+            self.breadcrumbs.push(route);
           }
         });
       }
