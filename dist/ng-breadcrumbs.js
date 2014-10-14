@@ -1,5 +1,5 @@
 /**
- * ng-breadcrumb.js - v0.2.0 - A better AngularJS service to help with
+ * ng-breadcrumb.js - v0.3.0 - A better AngularJS service to help with
  * breadcrumb-style navigation between views
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
@@ -36,50 +36,53 @@
           },
           generateBreadcrumbs: function() {
             var routes = $route.routes,
-              pathElements = $location.path().split('/'),
-              path = '',
-              self = this;
+                _this = this,
+                params,
+                pathElements,
+                pathObj = {},
+                path = '',
+                originalPath = '',
+                param;
 
-            var getRoute = function(path) {
-              if ($route.current) {
-                var param,
-                  isParamLastFragment,
-                  re,
-                  lastParamRe,
-                  route,
-                  pathDef = path;
-                angular.forEach($route.current.params, function (value, key) {
-                  re = new RegExp('\/' + value + '(\/|$)', 'g');
-                  lastParamRe = new RegExp('\/' + value + '(\/$|$)', 'g');
-                  if (pathDef.match(re)) {
-                    param = value;
-                  }
-                  isParamLastFragment = pathDef.match(lastParamRe);
-                  pathDef = pathDef.replace(re, '/:' + key + '$1');
-                });
-                route = routes[pathDef];
-                param = isParamLastFragment && !route.excludeBreadcrumb ?
-                  param : false;
-                if (route) {
-                  return { path: path,
-                    label: route.label || param,
-                    param: param };
+            if ($route && $route.current && $route.current.originalPath) {
+              this.breadcrumbs = [];
+              params = $route.current.params;
+              pathElements = $route.current.originalPath.trim().split('/');
+
+              angular.forEach(pathElements, function(pathElement, index) {
+                param = pathElement[0] === ':' &&
+                        typeof params[pathElement
+                          .slice(1, pathElement.length)] !== 'undefined' ?
+                        params[pathElement.slice(1, pathElement.length)] :
+                        false;
+
+                pathObj[index] = {
+                  path: param || pathElement,
+                  originalPath: pathElement
+                };
+
+                path = Object
+                  .keys(pathObj)
+                  .map(function(k) { return pathObj[k].path;  })
+                  .join('/') || '/';
+
+                originalPath = Object
+                  .keys(pathObj)
+                  .map(function(k) { return pathObj[k].originalPath;  })
+                  .join('/') || '/';
+
+                if (routes[originalPath] &&
+                    (routes[originalPath].label || param) &&
+                    !routes[originalPath].excludeBreadcrumb) {
+                  _this.breadcrumbs.push({
+                    path: path,
+                    originalPath: originalPath,
+                    label: routes[originalPath].label || param,
+                    param: param
+                  });
                 }
-              }
-            };
-
-            if (pathElements[1] === '') {
-              delete pathElements[1];
+              });
             }
-
-            this.breadcrumbs = [];
-            angular.forEach(pathElements, function(el) {
-              path += path === '/' ? el : '/' + el;
-              var route = getRoute(path);
-              if (route) {
-                self.breadcrumbs.push(route);
-              }
-            });
           }
         };
 
