@@ -84,7 +84,12 @@ gulp.task('protractor', function(done) {
       }
       done();
     })
-    .on('error', function() { done(); });
+    .on('error', function() {
+      if (mode === RUN_MODE) {
+        connect.serverClose();
+      }
+      done();
+    });
 });
 
 gulp.task('debug', function() {
