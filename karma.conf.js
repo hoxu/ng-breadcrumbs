@@ -21,6 +21,9 @@ module.exports = function(config) {
     frameworks: ['requirejs', 'mocha', 'chai'],
     files: testFiles,
     autoWatch: false,
-    captureTimeout: 60000
+    captureTimeout: 60000,
+    preprocessors: {
+      'src/**/*.js': 'coverage'
+    }
   });
 };

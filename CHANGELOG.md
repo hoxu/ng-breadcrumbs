@@ -1,5 +1,9 @@
 # Changes to ng-breadcrumbs
 
+## v0.4.0
+1. Added #31: Add code coverage
+2. Fixed #35: Error: [ngRepeat:dupes]
+
 ## v0.3.0
 
 1. Added #34: Use flat-github-ribbon

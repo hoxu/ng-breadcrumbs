@@ -49,6 +49,11 @@
               params = $route.current.params;
               pathElements = $route.current.originalPath.trim().split('/');
 
+              // Necessary to get rid of of duplicate empty string on root path
+              if (pathElements[1] === '') {
+                delete pathElements[1];
+              }
+
               angular.forEach(pathElements, function(pathElement, index) {
                 param = pathElement[0] === ':' &&
                         typeof params[pathElement
