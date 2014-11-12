@@ -1,15 +1,15 @@
 var gulp = require('gulp'),
-  uglify = require('gulp-uglify'),
-  connect = require('gulp-connect'),
-  karma = require('gulp-karma'),
-  jshint = require('gulp-jshint'),
-  protractor = require("gulp-protractor").protractor,
-  concat = require('gulp-concat'),
-  rename = require('gulp-rename'),
-  program = require('commander'),
-  debug = false,
-  WATCH_MODE = 'watch',
-  RUN_MODE = 'run';
+    uglify = require('gulp-uglify'),
+    connect = require('gulp-connect'),
+    karma = require('gulp-karma'),
+    jshint = require('gulp-jshint'),
+    protractor = require("gulp-protractor").protractor,
+    concat = require('gulp-concat'),
+    rename = require('gulp-rename'),
+    program = require('commander'),
+    debug = false,
+    WATCH_MODE = 'watch',
+    RUN_MODE = 'run';
 
 var mode = RUN_MODE;
 
