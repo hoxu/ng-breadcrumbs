@@ -1,11 +1,6 @@
 /**
-<<<<<<< HEAD
- * ng-breadcrumb.js - v0.4.1 - A better AngularJS service to help with breadcrumb-style navigation between views
- * Based on https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js
-=======
- * ng-breadcrumb.js - v0.3.0 - A better AngularJS service to help with
- * breadcrumb-style navigation between views
->>>>>>> 271ce2e0106589f2f4e6e2faa38aa04810823252
+ * ng-breadcrumb.js - v0.4.1 - A better AngularJS service to help with
+ * breadcrumb-style navigation between views.
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
  */
@@ -56,7 +51,7 @@
 
               // Necessary to get rid of of duplicate empty string on root path
               if (pathElements[1] === '') {
-                delete pathElements[1];
+                pathElements.splice(1, 1);
               }
 
               angular.forEach(pathElements, function(pathElement, index) {
@@ -96,25 +91,11 @@
           }
         };
 
-<<<<<<< HEAD
-        if (pathElements[1] === '') {
-          pathElements.splice(1, 1);
-        }
-
-        this.breadcrumbs = [];
-        angular.forEach(pathElements, function(el) {
-          path += path === '/' ? el : '/' + el;
-          var route = getRoute(path);
-          if (route) {
-            self.breadcrumbs.push(route);
-          }
-=======
         // We want to update breadcrumbs only when a route is actually changed
         // as $location.path() will get updated immediately (even if route
         // change fails!)
         $rootScope.$on('$routeChangeSuccess', function() {
           BreadcrumbService.generateBreadcrumbs();
->>>>>>> 271ce2e0106589f2f4e6e2faa38aa04810823252
         });
 
         $rootScope.$watch(

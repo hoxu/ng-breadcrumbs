@@ -1,6 +1,6 @@
 /**
- * ng-breadcrumb.js - v0.4.1 - A better AngularJS service to help with breadcrumb-style navigation between views
- * Based on https://github.com/angular-app/angular-app/blob/master/client/src/common/services/breadcrumbs.js
+ * ng-breadcrumb.js - v0.4.1 - A better AngularJS service to help with
+ * breadcrumb-style navigation between views.
  *
  * @author Ian Kennington Walter (http://ianvonwalter.com)
  */
