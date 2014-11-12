@@ -1,0 +1,18 @@
+{
+  "browser": true,
+  "jquery": true,
+  "node": true,
+  "camelcase": true,
+  "eqeqeq": true,
+  "indent": 2,
+  "latedef": true,
+  "maxlen": 80,
+  "newcap": true,
+  "quotmark": "single",
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "eqnull": true,
+  "predef": ["angular", "describe", "it", "browser", "by", "expect", "define",
+             "requirejs", "requirejsConfig", "beforeEach", "inject", "element"]
+}

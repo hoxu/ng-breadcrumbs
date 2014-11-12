@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>{{ investor.name }}</h4>
+  </div>
+  <div class="panel-body">
+    <span ng-bind="summary"></span>
+  </div>
+  <table class="table">
+    <tr>
+      <th>Stock</th>
+      <th>Shares</th>
+    </tr>
+    <tr ng-repeat="position in investorService.getPositionsByInvestor(investor.id)">
+      <td>
+        <a ng-href="#/stock/{{ position.stock }}" ng-bind="position.stock"></a>
+      </td>
+      <td>
+        <a ng-href="#/investor/{{ position.investor }}/position/{{ position.id }}"
+           ng-bind="position.shares"></a>
+      </td>
+    </tr>
+  </table>
+</div>

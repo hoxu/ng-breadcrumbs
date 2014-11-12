@@ -2,7 +2,8 @@ define(
   [
     'angular',
     'ng-breadcrumbs',
-    'public/js/service/stock-service'
+    'public/js/service/stock-service',
+    'public/js/service/investor-service'
   ],
   function(angular) {
     'use strict';
@@ -11,6 +12,7 @@ define(
       .module('ng-breadcrumbs-demo.stock-detail-controller', [
         'ng-breadcrumbs-demo',
         'ng-breadcrumbs-demo.stock-service',
+        'ng-breadcrumbs-demo.investor-service',
         'ng-breadcrumbs'
       ])
       .controller('StockDetailController', [
@@ -19,20 +21,16 @@ define(
         '$timeout',
         'breadcrumbs',
         'StockService',
-        function($scope, $routeParams, $timeout, breadcrumbs, StockService) {
+        'InvestorService',
+        function($scope, $routeParams, $timeout, breadcrumbs, StockService,
+                 InvestorService) {
+          $scope.breadcrumbs = breadcrumbs;
+          $scope.investorService = InvestorService;
+          $scope.stock = StockService.stocks[$routeParams.stock];
+          $scope.summary = 'This is the Stock Detail page.';
           breadcrumbs.options = {
             'Stock Detail': $routeParams.stock + ' Details'
           };
-          $scope.breadcrumbs = breadcrumbs;
-
-          // NOTE: This is for illustration purposes only
-          $timeout(function() {
-            breadcrumbs.options =
-              angular.extend(breadcrumbs.options, { 'Home': 'Home!' });
-          }, 1200);
-
-          $scope.stock = StockService.stocks[$routeParams.stock];
-          $scope.summary = 'This is the Stock Detail page.';
         }
       ]);
   }

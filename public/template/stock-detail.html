@@ -8,4 +8,20 @@
     <p><strong>Price:</strong> {{ stock.price }}</p>
     <p><strong>Revenue:</strong> {{ stock.revenue }}</p>
   </div>
+  <table class="table">
+    <tr>
+      <th>Investor</th>
+      <th>Shares</th>
+    </tr>
+    <tr ng-repeat="position in investorService.getPositionsByStock(stock.symbol)">
+      <td>
+        <a ng-href="#/investor/{{ position.investor }}"
+           ng-bind="investorService.investors[position.investor].name"></a>
+      </td>
+      <td>
+        <a ng-href="#/investor/{{ position.investor }}/position/{{ position.id }}"
+           ng-bind="position.shares"></a>
+      </td>
+    </tr>
+  </table>
 </div>

@@ -20,7 +20,6 @@ define(
         'StockService',
         function($scope, $routeParams, breadcrumbs, StockService) {
           $scope.breadcrumbs = breadcrumbs;
-
           $scope.stock = StockService.stocks[$routeParams.stock];
           $scope.summary = "This is the Stock page.";
         }

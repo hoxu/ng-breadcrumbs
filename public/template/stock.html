@@ -6,7 +6,13 @@
     <p ng-bind="summary"></p>
     <br>
     <p><strong>Price:</strong> {{ stock.price }}</p>
-    <p><a ng-href="#/stock/{{ stock.symbol }}/detail">More details</a></p>
-    <p><a ng-href="#/stock/{{ stock.symbol }}/history">Stock History</a></p>
   </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a ng-href="#/stock/{{ stock.symbol }}/detail">More details</a>
+    </li>
+    <li class="list-group-item">
+      <a ng-href="#/stock/{{ stock.symbol }}/history">Stock History</a>
+    </li>
+  </ul>
 </div>
